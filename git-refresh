@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+set -e
+
+: '
+git refresh <remote_branch>
+
+Cleanly rebase a local working branch on a remote branch,
+which defaults to origin/master.
+'
+
+# if remote_branch not passed, default to master
+remote_branch=${1:-"master"}
+
+echo $remote_branch
+
+if current_branch=$(git symbolic-ref --short -q HEAD)
+then
+  # stash the changes in the current branch
+  git stash
+
+  # checkout the master branch 
+  git checkout master
+
+  # pull from remote master and rebase
+  git pull --rebase origin master
+
+  # return to working branch
+  git checkout $current_branch
+
+  # rebase current working branch on master
+  git rebase master
+
+  # apply locally stashed changes
+  git stash apply
+else
+  echo 'Error: Cannot get current branch'
+fi

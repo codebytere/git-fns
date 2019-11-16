@@ -29,6 +29,11 @@ A quick way to add a forgotten change to the most recent commit
 in a branch without needing to create a new one for a trivial 
 change. Automatically pushes to the current branch.
 
+#### `git refresh <remote_branch>`
+
+Cleanly rebase a local working branch on a remote branch,
+which defaults to origin/master.
+
 ## Manpages
 
 I've also included custom man pages for each of these new functions, which will need to be 
@@ -53,24 +58,22 @@ to see:
 man(1)                        git tack man page                       man(1)
 
 
-
 NAME
-       git  tack  -  Add  a  forgotten change to the most recent commit in a
+       git tack - Add a forgotten change to the most recent commit in a
        branch.
 
 SYNOPSIS
-       git tack [--filename]
+       git tack <filename>
 
 DESCRIPTION
-       A quick way to add a forgotten change to the most recent commit in  a
-       branch  without needing to create a new commit.  Automatically pushes
+       A quick way to add a forgotten change to the most recent commit in a
+       branch  without needing to create a new commit. Automatically pushes
        to the current branch.
 
 OPTIONS
-       --filename
+       <filename>
               The filename to stage.
 
 BUGS
        No known bugs.
-
 ```

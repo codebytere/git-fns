@@ -2,7 +2,7 @@
 set -e
 
 : '
-git tack <file_name>
+git tack <filename>
 
 A quick way to add a forgotten change to the most recent commit
 in a branch without needing to create a new one for a trivial 
