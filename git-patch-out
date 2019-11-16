@@ -2,7 +2,7 @@
 set -e
 
 : '
-git patch-out <file_location> <file_name>
+git patch-out <file_location> <filename>
 
 Allow a user to quickly dump a diff
 in patch format to their desktop.

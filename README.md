@@ -7,7 +7,7 @@ My personal collection of custom git functions.
 In order for you to effectively make use of this repository, you'll need to clone down
 its contents and ensure that they are in your `PATH`.
 
-**N.B:** I keep this in my home firectory, but you can put in anywhere
+**N.B:** I keep this in my home directory, but you can put in anywhere
 so long as it's added to your `PATH` accordingly.
 
 ```sh
@@ -18,10 +18,10 @@ $ export PATH=$PATH:$HOME/git-fns
 
 ## Functions
 
-#### `git patch-out <file_location> <file_name>`
+#### `git patch-out <file_location> <filename>`
 
-Allow a user to quickly dump a diff
-in patch format to their desktop.
+Allow a user to quickly export a diff
+in patch format to another location. Defaults to Desktop.
 
 #### `git tack <file_name>`
 
