@@ -34,6 +34,11 @@ change. Automatically pushes to the current branch.
 Cleanly rebase a local working branch on a remote branch,
 which defaults to origin/master.
 
+#### `git patch-apply <commit_url>`
+
+Apply a patch to your current working branch from
+a remote commit url.
+
 ## Manpages
 
 I've also included custom man pages for each of these new functions, which will need to be 

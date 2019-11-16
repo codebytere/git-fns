@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+set -e
+
+: '
+git patch-apply <commit_url>
+
+Apply a patch to your current working branch from
+a remote commit url.
+'
+
+# pull down commit as patch and store
+patch_data=$(curl -L $1.patch)
+
+# apply patch with fallback to 3-way merge
+git am --3way --whitespace=fix < patch_data
