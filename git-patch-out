@@ -17,7 +17,7 @@ PATCH_LOCATION="$HOME/Desktop"
 # set patch name to user input or default to local_diff
 PATCH_NAME="local_diff"
 
-# handle user flags
+# handle user arguments
 for i in "$@"
 do
 case $i in

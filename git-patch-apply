@@ -2,11 +2,32 @@
 set -e
 
 : '
-git patch-apply <commit_url>
+git patch-apply [-u|--url=<url>]
 
 Apply a patch to your current working branch from
 a remote commit url.
 '
+
+# default to false for URL for easy checking
+URL=0
+
+for i in "$@"
+do
+case $i in
+  -u=*|--url=*)
+  URL="${i#*=}"
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+# bail if no url is set
+if [ $URL -eq 0 ]
+then
+  echo "Error: url argument is required" && exit 1
+fi
 
 # pull down commit as patch and store
 patch_data=$(curl -L $1.patch)

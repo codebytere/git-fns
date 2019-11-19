@@ -7,7 +7,7 @@ My personal collection of custom git functions.
 In order for you to effectively make use of this repository, you'll need to clone down
 its contents and ensure that they are in your `PATH`.
 
-**N.B:** I keep this in my home directory, but you can put in anywhere
+**Nota Bene:** I keep this in my home directory, but you can put in anywhere
 so long as it's added to your `PATH` accordingly.
 
 ```sh
@@ -20,8 +20,8 @@ $ export PATH=$PATH:$HOME/git-fns
 
 #### `git patch-out [-l|--location=<path>] [-n|--name=<name>] [--a|--append]`
 
-* `-l|--location=<path>` - The location on disk where the file will be created.
-* `-n|--name=<name>` - The name of the file to create or append to.
+* `-l|--location=<path>` - The location on disk where the file will be created. Defaults to `$HOME/Desktop`.
+* `-n|--name=<name>` - The name of the file to create or append to. Defaults to `local_diff`.
 * `--a|--append` - Append to the file instead of overwriting it.
 
 Allow a user to quickly export a diff in patch format to a file at a chosen location. 
@@ -33,22 +33,25 @@ Defaults to a file named `local_diff` created at `$HOME/Desktop`.
 
 A quick way to add a forgotten change to the most recent commit
 in a branch without needing to create a new one for a trivial 
-change. Automatically pushes to the current branch.
+change. Automatically pushes to the current working branch.
 
 #### `git refresh [-r|remote=<name>] [-b|--branch=<name>]`
 
-* `-r|remote=<name>` - The name of the git remote.
-* `-b|--branch=<name>` - The name of the remote branch to rebase against.
+* `-r|remote=<name>` - The name of the git remote. Defaults to `origin`.
+* `-b|--branch=<name>` - The name of the remote branch to rebase against. Defaults to `master`.
 
-Cleanly rebase a local working branch on a remote branch,
-which defaults to origin/master.
+Cleanly rebase a local working branch on a remote branch.
 
-#### `git patch-apply <commit_url>`
+#### `git patch-apply [-u|--url=<url>]`
 
-Apply a patch to your current working branch from
-a remote commit url.
+* `-u|--url=<url>` - The url for the commit to apply to your current working branch.
 
-#### `git sync <upstream>`
+Apply a patch from a remote commit url to your current working branch.
+
+#### `git sync [-u|--upstream=<name>] [-o|--origin=<name>]`
+
+* `-u|--upstream=<name>` - The name of the upstream git remote. Defaults to `upstream`.
+* `-o|--origin=<name>` - The name of the origin git remote. Defaults to `origin`.
 
 Fetch latest commits from an upstream branch and update your origin
 with those commits.

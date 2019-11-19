@@ -2,25 +2,44 @@
 set -e
 
 : '
-git sync <upstream>
+git sync [-u|--upstream=<name>] [-o|--origin=<name>]
 
-Fetch latest commits from an upstream branch and update your origin
+Fetch latest commits from an upstream remote branch and update your origin
 with those commits.
 '
 
-# if upstream_branch_name not passed, default to master
-upstream=${1:-"upstream"}
+# if upstream not passed, default to 'upstream'
+UPSTREAM="upstream"
 
-if current_branch=$(git symbolic-ref --short -q HEAD)
+# if origin not passed, default to 'origin'
+ORIGIN="origin"
+
+# handle user arguments
+for i in "$@"
+do
+case $i in
+  -u=*|--upstream=*)
+  UPSTREAM="${i#*=}"
+  ;;
+  -o=*|--origin=*)
+  ORIGIN="${i#*=}"
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+if CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)
 then
   # fetch latest upstream commit sha
-  git fetch $upstream/$current_branch
+  git fetch $UPSTREAM $CURRENT_BRANCH
 
   # rebase local branch against latest upstream sha
-  git rebase $upstream/$current_branch
+  git rebase $UPSTREAM $CURRENT_BRANCH
 
   # update origin with latest upstream commit sha
-  git push "origin/$current_branch"
+  git push $ORIGIN $CURRENT_BRANCH
 else
   echo 'Error: Cannot get current branch'
 fi
