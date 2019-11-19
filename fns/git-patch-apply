@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -e
+
+: '
+git patch-apply [-u|--url=<url>]
+
+Apply a patch to your current working branch from
+a remote commit url.
+'
+
+# default to false for URL for easy checking
+URL=0
+
+for i in "$@"
+do
+case $i in
+  -u=*|--url=*)
+  URL="${i#*=}"
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+# bail if no url is set
+if [ "$URL" -eq 0 ]
+then
+  echo "Error: url argument is required" && exit 1
+fi
+
+# apply patch with fallback to 3-way merge
+git am --3way --whitespace=fix < "$(curl -L "$URL".patch)"

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2063
+
+set -e
+
+: '
+git tack [-f|--filepath=<path>]
+
+A quick way to add a forgotten change to the most recent commit
+in a branch without needing to create a new one for a trivial 
+change. Automatically pushes to the current branch.
+'
+
+# get current branch
+CURRENT_BRANCH="$(git branch | grep \* | cut -d ' ' -f2)"
+
+# default to staging all recently changed files
+STAGED="."
+
+# handle user flag
+for i in "$@"
+do
+case $i in
+  -f=*|--filepath=*)
+  STAGED="${i#*=}"
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+# stage all chosen files
+git add "$STAGED"
+
+# amend the previous commit with no changes to commit msg
+git commit --amend --no-edit
+
+## force push the changes (with lease!)
+git push --force-with-lease origin "$CURRENT_BRANCH"

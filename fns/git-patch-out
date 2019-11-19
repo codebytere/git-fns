@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -e
+
+: '
+git patch-out [-l|--location=<path>] [-n|--name=<name>] [--a|--append]
+
+Allow a user to quickly dump a diff
+in patch format to their desktop.
+'
+
+# default to overwriting contents of patch file
+APPEND_TO_FILE=0
+
+# set patch location to user input or default to ~/Desktop
+PATCH_LOCATION="$HOME/Desktop"
+
+# set patch name to user input or default to local_diff
+PATCH_NAME="local_diff"
+
+# handle user arguments
+for i in "$@"
+do
+case $i in
+  -l=*|--location=*)
+  PATCH_LOCATION="${i#*=}"
+  ;;
+  -n=*|--name=*)
+  PATCH_NAME="${i#*=}"
+  ;;
+  -a|--append)
+  APPEND_TO_FILE=1
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+# redirect diff and either append or replace in file at chosen location
+if [ "$APPEND_TO_FILE" -eq 0 ]
+then
+   git diff --full-index HEAD > "$PATCH_LOCATION/$PATCH_NAME.patch"
+else
+   git diff --full-index HEAD >> "$PATCH_LOCATION/$PATCH_NAME.patch"
+fi

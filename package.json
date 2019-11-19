@@ -1,0 +1,24 @@
+{
+  "name": "git-fns",
+  "version": "0.0.1",
+  "description": "My personal collection of custom git functions.",
+  "directories": {
+    "man": "man"
+  },
+  "scripts": {
+    "lint": "find fns -type f | xargs shellcheck -f gcc -a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codebytere/git-fns.git"
+  },
+  "author": "Shelley Vohr <shelley.vohr@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codebytere/git-fns/issues"
+  },
+  "homepage": "https://github.com/codebytere/git-fns#readme",
+  "devDependencies": {
+    "shellcheck": "^0.3.0"
+  }
+}

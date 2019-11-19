@@ -13,7 +13,7 @@ so long as it's added to your `PATH` accordingly.
 ```sh
 $ cd $HOME
 $ git clone https://github.com/codebytere/git-fns
-$ export PATH=$PATH:$HOME/git-fns
+$ export PATH=$PATH:$HOME/git-fns/fns
 ```
 
 ## Functions
