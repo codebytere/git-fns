@@ -27,7 +27,9 @@ $ export PATH=$PATH:$HOME/git-fns
 Allow a user to quickly export a diff in patch format to a file at a chosen location. 
 Defaults to a file named `local_diff` created at `$HOME/Desktop`.
 
-#### `git tack <file_name>`
+#### `git tack [-f|--filepath=<path>]`
+
+* `-f|--filepath=<path>` - The path to the file to stage and add to the last commit.
 
 A quick way to add a forgotten change to the most recent commit
 in a branch without needing to create a new one for a trivial 

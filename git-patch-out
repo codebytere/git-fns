@@ -27,6 +27,9 @@ case $i in
   -a|--append)
   APPEND=1
   ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
 esac
 done
 
