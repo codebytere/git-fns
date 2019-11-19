@@ -2,31 +2,50 @@
 set -e
 
 : '
-git refresh <remote_branch>
+git refresh [-r|remote=<name>] [-b|--branch=<name>]
 
 Cleanly rebase a local working branch on a remote branch,
 which defaults to origin/master.
 '
 
-# if remote_branch not passed, default to master
-remote_branch=${1:-"master"}
+# if remote not passed, default to origin
+REMOTE="origin"
 
-if current_branch=$(git symbolic-ref --short -q HEAD)
+# if branch not passed, default to master
+BRANCH="master"
+
+# handle user flag
+for i in "$@"
+do
+case $i in
+  -r=*|--remote=*)
+  REMOTE="${i#*=}"
+  ;;
+  -b=*|--branch=*)
+  BRANCH="${i#*=}"
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+if CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)
 then
   # stash the changes in the current branch
   git stash
 
-  # checkout the master branch 
-  git checkout master
+  # checkout the chosen branch 
+  git checkout $BRANCH
 
-  # pull from remote master and rebase
-  git pull --rebase origin master
+  # pull from remote branch and rebase
+  git pull --rebase $REMOTE $BRANCH
 
   # return to working branch
-  git checkout $current_branch
+  git checkout $CURRENT_BRANCH
 
-  # rebase current working branch on master
-  git rebase master
+  # rebase current working branch 
+  git rebase $BRANCH
 
   # apply locally stashed changes
   git stash apply

@@ -3,14 +3,16 @@
 .SH NAME
 git refresh \- Rebase a local branch against a remote branch.
 .SH SYNOPSIS
-git refresh <remote_branch>
+git refresh [-r|remote=<name>] [-b|--branch=<name>]
 .SH DESCRIPTION
 Cleanly rebase a local working branch on a remote branch.
 Defaults to origin/master.
 .SH OPTIONS
 .TP
-.I <remote_branch>
-The remote branch to rebase against.
+.I [-r|--remote]
+The name of the git remote.
+.I [-b|--branch=<name>]
+The name of the remote branch to rebase against.
 .SH BUGS
 No known bugs.
 .SH AUTHOR
