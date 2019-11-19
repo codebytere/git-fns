@@ -11,8 +11,6 @@ which defaults to origin/master.
 # if remote_branch not passed, default to master
 remote_branch=${1:-"master"}
 
-echo $remote_branch
-
 if current_branch=$(git symbolic-ref --short -q HEAD)
 then
   # stash the changes in the current branch

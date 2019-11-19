@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+set -e
+
+: '
+git sync <upstream>
+
+Fetch latest commits from an upstream branch and update your origin
+with those commits.
+'
+
+# if upstream_branch_name not passed, default to master
+upstream=${1:-"upstream"}
+
+if current_branch=$(git symbolic-ref --short -q HEAD)
+then
+  # fetch latest upstream commit sha
+  git fetch $upstream/$current_branch
+
+  # rebase local branch against latest upstream sha
+  git rebase $upstream/$current_branch
+
+  # update origin with latest upstream commit sha
+  git push "origin/$current_branch"
+else
+  echo 'Error: Cannot get current branch'
+fi

@@ -39,6 +39,11 @@ which defaults to origin/master.
 Apply a patch to your current working branch from
 a remote commit url.
 
+#### `git sync <upstream>`
+
+Fetch latest commits from an upstream branch and update your origin
+with those commits.
+
 ## Manpages
 
 I've also included custom man pages for each of these new functions, which will need to be 
