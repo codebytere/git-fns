@@ -18,10 +18,14 @@ $ export PATH=$PATH:$HOME/git-fns
 
 ## Functions
 
-#### `git patch-out <file_location> <filename>`
+#### `git patch-out [-l|--location=<path>] [-n|--name=<name>] [--a|--append]`
 
-Allow a user to quickly export a diff
-in patch format to another location. Defaults to Desktop.
+* `-l|--location=<path>` - The location on disk where the file will be created.
+* `-n|--name=<name>` - The name of the file to create or append to.
+* `--a|--append` - Append to the file instead of overwriting it.
+
+Allow a user to quickly export a diff in patch format to a file at a chosen location. 
+Defaults to a file named `local_diff` created at `$HOME/Desktop`.
 
 #### `git tack <file_name>`
 

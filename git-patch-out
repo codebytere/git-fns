@@ -2,24 +2,38 @@
 set -e
 
 : '
-git patch-out <file_location> <filename>
+git patch-out [-l|--location=<path>] [-n|--name=<name>] [--a|--append]
 
 Allow a user to quickly dump a diff
 in patch format to their desktop.
 '
 
-# choose what file(s) to stage
-if [ "$#" -gt 2 ]; then
-  echo 'Error: this command takes 2 arguments - filename and output location.'
-  exit 1
-fi
-
 # set patch location to user input or default to ~/Desktop
-PATCH_LOCATION=${1:-"$HOME/Desktop"}
+PATCH_LOCATION="$HOME/Desktop"
 
 # set patch name to user input or default to local_diff
-PATCH_NAME=${2:-"local_diff"}
+PATCH_NAME="local_diff"
 
-# get changes to all tracked files and then redirect
-# output to a patch at desired location
-git diff --full-index HEAD > $PATCH_LOCATION/$PATCH_NAME.patch
+# handle user flags
+for i in "$@"
+do
+case $i in
+  -l=*|--location=*)
+  PATCH_LOCATION="${i#*=}"
+  ;;
+  -n=*|--name=*)
+  PATCH_NAME="${i#*=}"
+  ;;
+  -a|--append)
+  APPEND=1
+  ;;
+esac
+done
+
+# redirect diff and either append or replace in file at chosen location
+if [ $APPEND == 1 ]
+then
+   git diff --full-index HEAD > $PATCH_LOCATION/$PATCH_NAME.patch
+else
+   git diff --full-index HEAD >> $PATCH_LOCATION/$PATCH_NAME.patch
+fi
