@@ -5,7 +5,7 @@ set -e
 : '
 git get-fork-branch [-u|--username=<username>] [-b|--branch=<branch>]
 
-Checkout a branch from an arbitrary fork.
+Check out a branch from an arbitrary fork.
 '
 
 # The fork username.

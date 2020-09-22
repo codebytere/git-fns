@@ -18,43 +18,77 @@ $ export PATH=$PATH:$HOME/git-fns/fns
 
 ## Functions
 
-#### `git patch-out [-l|--location=<path>] [-n|--name=<name>] [--a|--append]`
+### `git get-fork-branch [-r|--remote=<remote>] [-b|--branch=<branch>]`
 
-* `-l|--location=<path>` - The location on disk where the file will be created. Defaults to `$HOME/Desktop`.
+* `-r|--remote=<remote>` - The username of the user whose fork you want to check out a branch from.
+* `-b|--branch=<branch>` - The name of the remote branch to check out.
+
+Check out a branch from an arbitrary fork.
+
+Example:
+```sh
+electron on git:master ❯ git get-fork-branch -u=codebytere -b=testing
+```
+
+### `git patch-out [-l|--location=<location>] [-n|--name=<name>] [--a|--append]`
+
+* `-l|--location=<location>` - The location on disk where the file will be created. Defaults to `$HOME/Desktop`.
 * `-n|--name=<name>` - The name of the file to create or append to. Defaults to `local_diff`.
 * `--a|--append` - Append to the file instead of overwriting it.
 
-Allow a user to quickly export a diff in patch format to a file at a chosen location. 
-Defaults to a file named `local_diff` created at `$HOME/Desktop`.
+Allow a user to quickly export a diff in patch format to a file at a chosen location.  Defaults to a file named `local_diff` created at `$HOME/Desktop`.
 
-#### `git tack [-f|--filepath=<path>]`
+Example:
+```sh
+electron on git:master ❯ git patch-out -l=$HOME/Downloads --append
+```
 
-* `-f|--filepath=<path>` - The path to the file to stage and add to the last commit.
+### `git tack [-f|--filepath=<filepath>]`
 
-A quick way to add a forgotten change to the most recent commit
-in a branch without needing to create a new one for a trivial 
-change. Automatically pushes to the current working branch.
+* `-f|--filepath=<filepath>` - The path to the file to stage and add to the last commit.
 
-#### `git refresh [-r|remote=<name>] [-b|--branch=<name>]`
+A quick way to add a forgotten change to the most recent commit in a branch without needing to create a new one for a trivial change. Automatically pushes to the current working branch.
 
-* `-r|remote=<name>` - The name of the git remote. Defaults to `origin`.
-* `-b|--branch=<name>` - The name of the remote branch to rebase against. Defaults to `master`.
+Example:
+```sh
+electron on git:master ❯ git tack README.md
+```
+
+### `git refresh [-r|remote=<remote>] [-b|--branch=<branch>]`
+
+* `-r|remote=<remote>` - The name of the git remote. Defaults to `origin`.
+* `-b|--branch=<branch>` - The name of the remote branch to rebase against. Defaults to `master`.
 
 Cleanly rebase a local working branch on a remote branch.
 
-#### `git patch-apply [-u|--url=<url>]`
+Example:
+```sh
+electron on git:master ❯ git refresh -r=codebytere -b=testing
+```
+
+### `git patch-apply [-u|--url=<url>]`
 
 * `-u|--url=<url>` - The url for the commit to apply to your current working branch.
 
 Apply a patch from a remote commit url to your current working branch.
 
-#### `git sync [-u|--upstream=<name>] [-o|--origin=<name>]`
+Example:
+```sh
+electron on git:master ❯ git patch-apply
+```
 
-* `-u|--upstream=<name>` - The name of the upstream git remote. Defaults to `upstream`.
-* `-o|--origin=<name>` - The name of the origin git remote. Defaults to `origin`.
+### `git sync [-u|--upstream=<upstream>] [-o|--origin=<origin>]`
+
+* `-u|--upstream=<upstream>` - The name of the upstream git remote. Defaults to `upstream`.
+* `-o|--origin=<origin>` - The name of the origin git remote. Defaults to `origin`.
 
 Fetch latest commits from an upstream branch and update your origin
 with those commits.
+
+Example:
+```sh
+electron on git:master ❯ git patch-apply https://github.com/electron/electron/commit/d2a82dbd1d2bd3869f910dd563001b98b3cec736
+```
 
 ## Manpages
 
@@ -65,13 +99,14 @@ Assuming you have already cloned down the directory as directed above:
 
 ```sh
 $ cd $HOME
-$ export PATH=$PATH:$HOME/git-fns/man
+$ export MANPATH=$MANPATH:$HOME/git-fns/man
 ```
 
 You will then be able to run:
 
 ```sh
-$ man git-tack # or any other custom function
+# Or any other custom function.
+$ man git-tack
 ```
 
 to see:
