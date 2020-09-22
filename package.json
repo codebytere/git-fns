@@ -1,6 +1,6 @@
 {
   "name": "git-fns",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "My personal collection of custom git functions.",
   "directories": {
     "man": "man"
@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/codebytere/git-fns#readme",
   "devDependencies": {
-    "shellcheck": "^0.3.0"
+    "shellcheck": "^0.4.4"
   }
 }
