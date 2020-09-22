@@ -9,13 +9,13 @@ Cleanly rebase a local working branch on a remote branch,
 which defaults to origin/master.
 '
 
-# if remote not passed, default to origin
+# If remote not passed, default to origin.
 REMOTE="origin"
 
-# if branch not passed, default to master
+# If branch not passed, default to master.
 BRANCH="master"
 
-# handle user flag
+# Parse user arguments.
 for i in "$@"
 do
 case $i in
@@ -33,22 +33,22 @@ done
 
 if CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)
 then
-  # stash the changes in the current branch
+  # Stash the changes in the current branch.
   git stash
 
-  # checkout the chosen branch 
+  # Checkout the chosen branch.
   git checkout "$BRANCH"
 
-  # pull from remote branch and rebase
+  # Pull from remote branch and rebase.
   git pull --rebase "$REMOTE" "$BRANCH"
 
-  # return to working branch
+  # Return to working branch.
   git checkout "$CURRENT_BRANCH"
 
-  # rebase current working branch 
+  # Rebase current working branch .
   git rebase "$BRANCH"
 
-  # apply locally stashed changes
+  # Apply locally stashed changes.
   git stash apply
 else
   echo 'Error: Cannot get current branch'

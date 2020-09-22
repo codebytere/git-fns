@@ -9,8 +9,8 @@ Apply a patch to your current working branch from
 a remote commit url.
 '
 
-# default to false for URL for easy checking
-URL=0
+# The url to pull the patch from. 
+URL=""
 
 for i in "$@"
 do
@@ -24,11 +24,11 @@ case $i in
 esac
 done
 
-# bail if no url is set
-if [ "$URL" -eq 0 ]
+# Bail if no url is set.
+if [ -z "$URL" ]
 then
   echo "Error: url argument is required" && exit 1
 fi
 
-# apply patch with fallback to 3-way merge
+# Apply patch with fallback to 3-way merge.
 git am --3way --whitespace=fix < "$(curl -L "$URL".patch)"

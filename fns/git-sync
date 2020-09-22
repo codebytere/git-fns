@@ -9,13 +9,13 @@ Fetch latest commits from an upstream remote branch and update your origin
 with those commits.
 '
 
-# if upstream not passed, default to 'upstream'
+# The name of the upstream remote.
 UPSTREAM="upstream"
 
-# if origin not passed, default to 'origin'
+# The name of the origin remote.
 ORIGIN="origin"
 
-# handle user arguments
+# Parse user arguments.
 for i in "$@"
 do
 case $i in
@@ -33,13 +33,13 @@ done
 
 if CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)
 then
-  # fetch latest upstream commit sha
+  # Fetch latest upstream commit sha.
   git fetch "$UPSTREAM" "$CURRENT_BRANCH"
 
-  # rebase local branch against latest upstream sha
+  # Rebase local branch against latest upstream sha.
   git rebase "$UPSTREAM" "$CURRENT_BRANCH"
 
-  # update origin with latest upstream commit sha
+  # Update origin with latest upstream commit sha.
   git push "$ORIGIN" "$CURRENT_BRANCH"
 else
   echo 'Error: Cannot get current branch'

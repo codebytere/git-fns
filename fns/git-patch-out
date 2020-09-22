@@ -9,16 +9,16 @@ Allow a user to quickly dump a diff
 in patch format to their desktop.
 '
 
-# default to overwriting contents of patch file
+# Whether to append to or overwrite the generated patchfile.
 APPEND_TO_FILE=0
 
-# set patch location to user input or default to ~/Desktop
+# The location to output the patchfile.
 PATCH_LOCATION="$HOME/Desktop"
 
-# set patch name to user input or default to local_diff
+# The name of the patchfile.
 PATCH_NAME="local_diff"
 
-# handle user arguments
+# Parse user arguments.
 for i in "$@"
 do
 case $i in
@@ -37,7 +37,7 @@ case $i in
 esac
 done
 
-# redirect diff and either append or replace in file at chosen location
+# Redirect diff and either append or replace in file at chosen location.
 if [ "$APPEND_TO_FILE" -eq 0 ]
 then
    git diff --full-index HEAD > "$PATCH_LOCATION/$PATCH_NAME.patch"
