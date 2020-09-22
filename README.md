@@ -72,9 +72,10 @@ electron on git:master ❯ git refresh -r=codebytere -b=testing
 
 Apply a patch from a remote commit url to your current working branch.
 
+
 Example:
 ```sh
-electron on git:master ❯ git patch-apply
+electron on git:master ❯ git patch-apply https://github.com/electron/electron/commit/d2a82dbd1d2bd3869f910dd563001b98b3cec736
 ```
 
 ### `git sync [-u|--upstream=<upstream>] [-o|--origin=<origin>]`
@@ -87,7 +88,7 @@ with those commits.
 
 Example:
 ```sh
-electron on git:master ❯ git patch-apply https://github.com/electron/electron/commit/d2a82dbd1d2bd3869f910dd563001b98b3cec736
+electron on git:master ❯ git sync
 ```
 
 ## Manpages

@@ -37,7 +37,7 @@ then
   git fetch "$UPSTREAM" "$CURRENT_BRANCH"
 
   # Rebase local branch against latest upstream sha.
-  git rebase "$UPSTREAM" "$CURRENT_BRANCH"
+  git rebase "$UPSTREAM/$CURRENT_BRANCH"
 
   # Update origin with latest upstream commit sha.
   git push "$ORIGIN" "$CURRENT_BRANCH"

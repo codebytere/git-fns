@@ -3,13 +3,13 @@
 set -e
 
 : '
-git get-fork-branch [-u|--username=<username>] [-b|--branch=<branch>]
+git get-fork-branch [-r|--remote=<remote>] [-b|--branch=<branch>]
 
 Check out a branch from an arbitrary fork.
 '
 
-# The fork username.
-USERNAME=""
+# The fork remote name.
+REMOTE=""
 
 # The name of the branch to check out.
 BRANCH=""
@@ -18,8 +18,8 @@ BRANCH=""
 for i in "$@"
 do
 case $i in
-  -u=*|--username=*)
-  USERNAME="${i#*=}"
+  -r=*|--remote=*)
+  REMOTE="${i#*=}"
   ;;
   -b=*|--branch=*)
   BRANCH="${i#*=}"
@@ -31,16 +31,16 @@ esac
 done
 
 # Bail if missing required arguments.
-if [ -z "$USERNAME" ] || [ -z "$BRANCH" ]
+if [ -z "$REMOTE" ] || [ -z "$BRANCH" ]
 then
-  echo "Error: url and branch arguments are required" && exit 1
+  echo "Error: remote and branch arguments are required" && exit 1
 fi
 
 # Fetch the current repo name.
 REPO_NAME=$(basename "$(git remote get-url origin)")
 
 # Fetch branch from user's remote.
-git fetch git@github.com:"$USERNAME/$REPO_NAME".git "$BRANCH:$BRANCH"
+git fetch git@github.com:"$REMOTE/$REPO_NAME".git "$BRANCH:$BRANCH"
 
 # Switch to new branch.
 git checkout "$BRANCH"
