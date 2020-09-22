@@ -30,11 +30,11 @@ Example:
 electron on git:master ❯ git get-fork-branch -u=codebytere -b=testing
 ```
 
-### `git patch-out [-l|--location=<location>] [-n|--name=<name>] [--a|--append]`
+### `git patch-out [-l|--location=<location>] [-n|--name=<name>] [-a|--append]`
 
 * `-l|--location=<location>` - The location on disk where the file will be created. Defaults to `$HOME/Desktop`.
 * `-n|--name=<name>` - The name of the file to create or append to. Defaults to `local_diff`.
-* `--a|--append` - Append to the file instead of overwriting it.
+* `-a|--append` - Append to the file instead of overwriting it.
 
 Allow a user to quickly export a diff in patch format to a file at a chosen location.  Defaults to a file named `local_diff` created at `$HOME/Desktop`.
 

@@ -3,16 +3,16 @@
 .SH NAME
 git patch-out \- Quickly export a diff to another location.
 .SH SYNOPSIS
-git patch-out [-l|--location=<path>] [-n|--name=<name>] [--a|--append]
+git patch-out [-l|--location=<location>] [-n|--name=<name>] [-a|--append]
 .SH DESCRIPTION
 Allow a user to quickly export a diff in patch format to a file at a chosen location.
 .SH OPTIONS
 .TP
-.I [-l|--location=<path>]
+.I [-l|--location=<location>]
 The location on disk where the file will be created. Defaults to '$HOME/Desktop'.
 .I  [-n|--name=<name>]
 The name of the file to create or append to. Defaults to 'local_diff'.
-.I  [--a|--append]
+.I  [-a|--append]
 Append to the file instead of overwriting it.
 .SH BUGS
 No known bugs.
