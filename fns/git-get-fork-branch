@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -e
+
+: '
+git get-fork-branch [-u|--username=<username>] [-b|--branch=<branch>]
+
+Checkout a branch from an arbitrary fork.
+'
+
+# The fork username.
+USERNAME=""
+
+# The name of the branch to check out.
+BRANCH=""
+
+# Handle user arguments.
+for i in "$@"
+do
+case $i in
+  -u=*|--username=*)
+  USERNAME="${i#*=}"
+  ;;
+  -b=*|--branch=*)
+  BRANCH="${i#*=}"
+  ;;
+  *)
+  echo "Unknown argument: $i" && exit 1
+  ;;
+esac
+done
+
+# Bail if missing required arguments.
+if [ -z "$USERNAME" ] || [ -z "$BRANCH" ]
+then
+  echo "Error: url and branch arguments are required" && exit 1
+fi
+
+# Fetch the current repo name.
+REPO_NAME=$(basename "$(git remote get-url origin)")
+
+# Fetch branch from user's remote.
+git fetch git@github.com:"$USERNAME/$REPO_NAME".git "$BRANCH:$BRANCH"
+
+# Switch to new branch.
+git checkout "$BRANCH"
