@@ -3,7 +3,7 @@
 set -e
 
 : '
-git get-fork-branch [-r|--remote=<remote>] [-b|--branch=<branch>]
+git get-fork-branch remote:branch
 
 Check out a branch from an arbitrary fork.
 '
@@ -14,21 +14,8 @@ REMOTE=""
 # The name of the branch to check out.
 BRANCH=""
 
-# Handle user arguments.
-for i in "$@"
-do
-case $i in
-  -r=*|--remote=*)
-  REMOTE="${i#*=}"
-  ;;
-  -b=*|--branch=*)
-  BRANCH="${i#*=}"
-  ;;
-  *)
-  echo "Unknown argument: $i" && exit 1
-  ;;
-esac
-done
+# shellcheck disable=SC2068
+read -r REMOTE BRANCH <<< "$(IFS=":"; echo $@)"
 
 # Bail if missing required arguments.
 if [ -z "$REMOTE" ] || [ -z "$BRANCH" ]

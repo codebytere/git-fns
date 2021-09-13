@@ -3,15 +3,13 @@
 .SH NAME
 git get-fork-branch \- Check out a branch from an arbitrary fork.
 .SH SYNOPSIS
-git get-fork-branch [-u|--remote=<remote>] [-b|--branch=<branch>]
+git get-fork-branch remote:branch
 .SH DESCRIPTION
 Fetch and check out a branch from an arbitrary fork for local testing.
 .SH OPTIONS
 .TP
-.I [-u=r|--remote=<remote>]
-The username of the user whose fork you want to check out a branch from.
-.I [-b|--branch=<branch>]
-The name of the remote branch to check out.
+.I [remote:branch]
+The remote and branch to check out, e.g. @codebytere:patch-1.
 .SH BUGS
 No known bugs.
 .SH AUTHOR
