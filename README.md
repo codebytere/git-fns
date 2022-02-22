@@ -18,18 +18,6 @@ $ export PATH=$PATH:$HOME/git-fns/fns
 
 ## Functions
 
-### `git get-fork-branch [-r|--remote=<remote>] [-b|--branch=<branch>]`
-
-* `-r|--remote=<remote>` - The username of the user whose fork you want to check out a branch from.
-* `-b|--branch=<branch>` - The name of the remote branch to check out.
-
-Check out a branch from an arbitrary fork.
-
-Example:
-```sh
-electron on git:master ❯ git get-fork-branch -u=codebytere -b=testing
-```
-
 ### `git patch-out [-l|--location=<location>] [-n|--name=<name>] [-a|--append]`
 
 * `-l|--location=<location>` - The location on disk where the file will be created. Defaults to `$HOME/Desktop`.
